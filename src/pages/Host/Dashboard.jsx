@@ -1,8 +1,26 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { Suspense } from "react";
+import { Await, Link, useLoaderData } from "react-router-dom";
 import { BsStarFill } from "react-icons/bs";
-
+import { getHostVans } from "../../services/api";
+export async function loader() {
+  return { vans: getHostVans() };
+}
 export default function Dashboard() {
+  const data = useLoaderData();
+  function displayVans(vans) {
+    return vans.map((van) => (
+      <section key={van.id}>
+        <div className="host-van-single">
+          <img src={van.imageUrl} alt={`Photo of ${van.name}`} />
+          <div className="host-van-info">
+            <h3>{van.name}</h3>
+            <p>${van.price}/day</p>
+          </div>
+          <Link to={`vans/${van.id}`}>Details</Link>
+        </div>
+      </section>
+    ));
+  }
   return (
     <>
       <section className="host-dashboard-earnings">
@@ -29,16 +47,9 @@ export default function Dashboard() {
           <Link to="vans">View all</Link>
         </div>
         <div className="host-vans-list">
-          <section>
-            <div className="host-van-single">
-              <img src={"/assets/about-hero.png"} alt={`Photo of name`} />
-              <div className="host-van-info">
-                <h3>name</h3>
-                <p>$10K/day</p>
-              </div>
-              <Link to={`vans/:id`}>View</Link>
-            </div>
-          </section>
+          <Suspense fallback={<h2>Loading...</h2>}>
+            <Await resolve={data.vans}>{displayVans}</Await>
+          </Suspense>
         </div>
       </section>
     </>
