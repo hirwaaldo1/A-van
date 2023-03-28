@@ -18,6 +18,7 @@ import HostReviews from "./pages/Host/Reviews";
 import { loader as vansDashboardLoader } from "./pages/Host/Dashboard";
 import { loader as vansLoader } from "./pages/Vans";
 import { loader as vansIdLoader } from "./pages/Vans/Detail";
+import { loader as hostVansLoader } from "./pages/Host/Vans";
 import Error from "./components/error/Error";
 import "../server";
 import VanDetail from "./pages/Vans/Detail";
@@ -37,7 +38,7 @@ const router = createBrowserRouter(
           element={<Dashboard />}
         />
         <Route path="income" element={<HostIncome />} />
-        <Route path="vans" element={<HostVans />} />
+        <Route path="vans" element={<HostVans />} loader={hostVansLoader} />
         <Route path="reviews" element={<HostReviews />} />
       </Route>
       <Route path="*" element={<NotFound />} />

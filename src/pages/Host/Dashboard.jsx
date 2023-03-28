@@ -16,7 +16,9 @@ export default function Dashboard() {
             <h3>{van.name}</h3>
             <p>${van.price}/day</p>
           </div>
-          <Link to={`vans/${van.id}`}>Details</Link>
+          <Link to={`/vans/${van.id}`} state={{ from: "host" }}>
+            Details
+          </Link>
         </div>
       </section>
     ));
