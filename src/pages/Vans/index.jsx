@@ -1,4 +1,4 @@
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 import { Await, Link, useLoaderData, useSearchParams } from "react-router-dom";
 export default function Vans() {
   const filterOption = ["simple", "luxury", "rugged"]; // all Variables should be named in camelCase
