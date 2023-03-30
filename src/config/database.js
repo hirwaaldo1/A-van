@@ -1,27 +1,22 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 const {
-  REACT_APP_FIREBASE_API_KEY,
-  REACT_APP_FIREBASE_AUTH_DOMAIN,
-  REACT_APP_FIREBASE_PROJECT_ID,
-  REACT_APP_FIREBASE_STORAGEBUCKET,
-  REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  REACT_APP_FIREBASE_APP_ID,
-} = process.env.NODE_ENV;
+  VITE_FIREBASE_API_KEY,
+  VITE_FIREBASE_AUTH_DOMAIN,
+  VITE_FIREBASE_DATABASE_URL,
+  VITE_FIREBASE_PROJECT_ID,
+  VITE_FIREBASE_STORAGEBUCKET,
+  VITE_FIREBASE_MESSAGING_SENDER_ID,
+  VITE_FIREBASE_APP_ID,
+} = import.meta.env;
 const FIREBASECONFIG = {
-  // apiKey: REACT_APP_FIREBASE_API_KEY,
-  // authDomain: REACT_APP_FIREBASE_AUTH_DOMAIN,
-  // projectId: REACT_APP_FIREBASE_PROJECT_ID,
-  // storageBucket: REACT_APP_FIREBASE_STORAGEBUCKET,
-  // messagingSenderId: REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  // appId: REACT_APP_FIREBASE_APP_ID,
-  apiKey: "AIzaSyCqyck0GqLEvWOByGagB89bJRQ8Qd40neM",
-  authDomain: "a-van-397a3.firebaseapp.com",
-  databaseURL: "https://a-van-397a3-default-rtdb.firebaseio.com",
-  projectId: "a-van-397a3",
-  storageBucket: "a-van-397a3.appspot.com",
-  messagingSenderId: "323365645461",
-  appId: "1:323365645461:web:38663bfb2f83f53ad13f9c",
+  apiKey: VITE_FIREBASE_API_KEY,
+  authDomain: VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: VITE_FIREBASE_PROJECT_ID,
+  databaseURL: VITE_FIREBASE_DATABASE_URL,
+  storageBucket: VITE_FIREBASE_STORAGEBUCKET,
+  messagingSenderId: VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: VITE_FIREBASE_APP_ID,
 };
 
 const app = initializeApp(FIREBASECONFIG);
