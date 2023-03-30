@@ -1,10 +1,12 @@
 import { Suspense } from "react";
 import { Await, Link, useLoaderData } from "react-router-dom";
 import { BsStarFill } from "react-icons/bs";
-// import { getHostVans } from "../../services/api";
-export async function loader() {
-  // return { vans: getHostVans() };
+import { getVans } from "../../services/api";
+import { defer } from "react-router-dom/dist";
+export function loader() {
+  return defer({ vans: getVans() });
 }
+
 export default function Dashboard() {
   const data = useLoaderData();
   function displayVans(vans) {

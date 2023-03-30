@@ -1,8 +1,9 @@
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
+import { getVan } from "../../services/api";
 
 export async function loader({ params }) {
-  let res = await fetch(`/api/vans/${params.vanId}`);
-  return res.json();
+  const res = await getVan(params.vanId);
+  return { vans: res };
 }
 
 export default function VanDetail() {

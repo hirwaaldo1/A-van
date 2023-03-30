@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 import { Await, Link, useLoaderData } from "react-router-dom";
+import { getVans } from "../../services/api";
 export async function loader() {
-  let res = await fetch("/api/vans");
-  return res.json();
+  return { vans: getVans() };
 }
 export default function HostVans() {
   const data = useLoaderData();

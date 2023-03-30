@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { Await, Link, useLoaderData, useSearchParams } from "react-router-dom";
+import { defer } from "react-router-dom/dist";
 import { getVans } from "../../services/api";
 export default function Vans() {
   const filterOption = ["simple", "luxury", "rugged"]; // all Variables should be named in camelCase
@@ -72,8 +73,6 @@ export default function Vans() {
     </div>
   );
 }
-export async function loader() {
-  const res = await getVans();
-  console.log(res, "res");
-  return { vans: res };
+export function loader() {
+  return defer({ vans: getVans() });
 }
