@@ -1,9 +1,9 @@
 import { Suspense } from "react";
 import { Await, Link, useLoaderData } from "react-router-dom";
 import { BsStarFill } from "react-icons/bs";
-import { getHostVans } from "../../services/api";
+// import { getHostVans } from "../../services/api";
 export async function loader() {
-  return { vans: getHostVans() };
+  // return { vans: getHostVans() };
 }
 export default function Dashboard() {
   const data = useLoaderData();

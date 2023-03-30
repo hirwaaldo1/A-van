@@ -20,7 +20,6 @@ import { loader as vansLoader } from "./pages/Vans";
 import { loader as vansIdLoader } from "./pages/Vans/Detail";
 import { loader as hostVansLoader } from "./pages/Host/Vans";
 import Error from "./components/error/Error";
-import "../server";
 import VanDetail from "./pages/Vans/Detail";
 import SignUp from "./pages/SignUp";
 const router = createBrowserRouter(
