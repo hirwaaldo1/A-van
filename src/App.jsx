@@ -22,6 +22,7 @@ import { loader as hostVansLoader } from "./pages/Host/Vans";
 import Error from "./components/error/Error";
 import VanDetail from "./pages/Vans/Detail";
 import SignUp from "./pages/SignUp";
+import { action as signupAction } from "./pages/SignUp";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
@@ -30,7 +31,7 @@ const router = createBrowserRouter(
       <Route path="vans/:vanId" element={<VanDetail />} loader={vansIdLoader} />
       <Route path="about" element={<About />} />
       <Route path="login" element={<Login />} />
-      <Route path="signup" element={<SignUp />} />
+      <Route path="signup" element={<SignUp />} action={signupAction} />
       <Route path="host" element={<HostLayout />}>
         <Route
           index

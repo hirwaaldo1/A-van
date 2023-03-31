@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Form } from "react-router-dom/dist";
 
 export default function Login() {
   return (
@@ -9,13 +10,13 @@ export default function Login() {
           sign up
         </Link>
       </h1>
-      <form method="post" className="login-form" replace>
+      <Form method="post" className="login-form">
         <input name="email" type="email" placeholder="Email address" />
         <input name="password" type="password" placeholder="Password" />
-        <button>
+        <button disabled={navigation.state === "submitting"}>
           {navigation.state === "submitting" ? "Logging in..." : "Log in"}
         </button>
-      </form>
+      </Form>
     </div>
   );
 }

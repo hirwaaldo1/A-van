@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 const {
   VITE_FIREBASE_API_KEY,
@@ -21,4 +22,5 @@ const FIREBASECONFIG = {
 
 const app = initializeApp(FIREBASECONFIG);
 const db = getFirestore(app);
+export const auth = getAuth(app);
 export default db;
