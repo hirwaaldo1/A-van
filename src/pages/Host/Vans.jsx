@@ -9,7 +9,7 @@ export default function HostVans() {
   function displayVans(vans) {
     return vans.map((van) => (
       <Link
-        to={`/vans/${van.id}`}
+        to={`${van.id}`}
         state={{ from: "host" }}
         key={van.id}
         className="host-van-link-wrapper"
