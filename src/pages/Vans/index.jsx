@@ -19,7 +19,7 @@ export default function Vans() {
     return displayData.map((van) => (
       <div key={van.id} className="van-tile">
         {/* the reason why i didn't used "/vans/:vanId" is because V6 came with new feature of relative */}
-        <Link to={`${van.id}`} state={{ from: "vans" }}>
+        <Link to={`${van.id}`} state={{ from: searchParams.get("type") }}>
           <img src={van.imageUrl} />
           <div className="van-info">
             <h3>{van.name}</h3>

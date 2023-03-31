@@ -17,7 +17,7 @@ export default function VanDetail() {
     <div className="van-detail-container">
       {state && (
         <span onClick={() => navigate(-1)} className="back-button">
-          &larr; <span>Back to type vans</span>
+          &larr; <span>Back to {state.from || "all type"} vans</span>
         </span>
       )}
 
