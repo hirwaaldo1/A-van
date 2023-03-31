@@ -6,13 +6,13 @@ export async function action({ request }) {
   const formData = await request.formData();
   const email = formData.get("email");
   const password = formData.get("password");
-  console.log(email, password, "password");
-  const loginUser = await signup(email, password);
-  return loginUser;
+  const respond = await signup(email, password);
+  return respond;
 }
 export default function SignUp() {
   const navigation = useNavigation();
   const errorMessage = useActionData();
+
   return (
     <div className="login-container">
       <h1>
@@ -24,7 +24,9 @@ export default function SignUp() {
       <Form method="post" className="login-form">
         <input name="email" type="email" placeholder="Email address" />
         <input name="password" type="password" placeholder="Password" />
-        {errorMessage && <h4 className="red">{errorMessage}</h4>}
+        {navigation.state === "idle" && errorMessage && (
+          <h4 className="red">{errorMessage}</h4>
+        )}
         <button disabled={navigation.state === "submitting"}>
           {navigation.state === "submitting" ? "wait ..." : "Submit"}
         </button>

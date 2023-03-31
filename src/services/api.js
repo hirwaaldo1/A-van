@@ -1,5 +1,8 @@
 import { collection, getDocs } from "firebase/firestore";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import db, { auth } from "../config/database";
 import { redirect } from "react-router-dom/dist";
 const vansCollection = collection(db, "vans");
@@ -20,8 +23,16 @@ export async function getVan(id) {
 
 export async function signup(email, password) {
   try {
-    let respond = await createUserWithEmailAndPassword(auth, email, password);
-    console.log(respond, "respond");
+    await createUserWithEmailAndPassword(auth, email, password);
+    return redirect("/host");
+  } catch (error) {
+    return error.message;
+  }
+}
+
+export async function login(email, password) {
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
     return redirect("/host");
   } catch (error) {
     return error.message;
