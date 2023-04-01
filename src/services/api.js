@@ -4,7 +4,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import db, { auth } from "../config/database";
-import { redirect } from "react-router-dom/dist";
+import { redirect } from "react-router-dom";
 const vansCollection = collection(db, "vans");
 export async function getVans() {
   const querySnapshot = await getDocs(vansCollection);
@@ -35,6 +35,17 @@ export async function login(email, password) {
     await signInWithEmailAndPassword(auth, email, password);
     return redirect("/host");
   } catch (error) {
+    return error.message;
+  }
+}
+
+export async function logout(navigate) {
+  try {
+    await auth.signOut();
+    console.log("logged out 11");
+    return navigate("/");
+  } catch (error) {
+    console.log(error, "error in logout");
     return error.message;
   }
 }

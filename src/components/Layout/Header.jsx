@@ -1,6 +1,9 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { logout } from "../../services/api";
+import { auth } from "../../config/database";
 
 export default function Header() {
+  const navigate = useNavigate();
   const activeStyles = {
     fontWeight: "bold",
     textDecoration: "underline",
@@ -32,9 +35,23 @@ export default function Header() {
           Vans
         </NavLink>
         <Link to="login" className="login-link">
-          <img src="/assets/avatar-icon.png" className="login-icon" />
+          <img
+            src="/assets/avatar-icon.png"
+            onClick={() => {
+              console.log(auth.currentUser, "current user");
+            }}
+            className="login-icon"
+          />
         </Link>
-        <button>X</button>
+        {auth.currentUser && (
+          <button
+            onClick={() => {
+              logout(navigate);
+            }}
+          >
+            X
+          </button>
+        )}
       </nav>
     </header>
   );
