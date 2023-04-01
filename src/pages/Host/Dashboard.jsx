@@ -3,7 +3,9 @@ import { Await, Link, useLoaderData } from "react-router-dom";
 import { BsStarFill } from "react-icons/bs";
 import { getVans } from "../../services/api";
 import { defer } from "react-router-dom/dist";
-export function loader() {
+import checkAuth from "../../utils/checkAuth";
+export async function loader() {
+  await checkAuth();
   return defer({ vans: getVans() });
 }
 

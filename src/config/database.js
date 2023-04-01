@@ -20,7 +20,7 @@ const FIREBASECONFIG = {
   appId: VITE_FIREBASE_APP_ID,
 };
 
-const app = initializeApp(FIREBASECONFIG);
+export const app = initializeApp(FIREBASECONFIG);
 const db = getFirestore(app);
 export const auth = getAuth(app);
 
