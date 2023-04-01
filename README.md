@@ -1,5 +1,7 @@
 # A-van with react-router-dom
 
+This Scrimba project utilizes only version 6 of react-router-dom to fetch and change pages, and additionally incorporates Firebase as the database
+
 ## Live version
 
 [A-van Project on netlify](https://a-van.netlify.app/)
@@ -18,7 +20,7 @@ In this A-van Project project we have the following pages done:
 
 This project is mainly based on [React.js](https://reactjs.org/) plus others few libraries listed below:
 
-- [redux](https://www.npmjs.com/package/redux)
+- [firebase](https://www.npmjs.com/package/firebase)
 - [react-icons](https://www.npmjs.com/package/react-icons)
 - [react-router-dom](https://www.npmjs.com/package/react-router-dom)
 - [vite](https://www.npmjs.com/package/vite)
