@@ -1,9 +1,17 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { logout } from "../../services/api";
 import { auth } from "../../config/database";
+import { onAuthStateChanged } from "firebase/auth";
+import { useEffect, useState } from "react";
 
 export default function Header() {
   const navigate = useNavigate();
+  const [user, setUser] = useState();
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      setUser(user);
+    });
+  }, [user]);
   const activeStyles = {
     fontWeight: "bold",
     textDecoration: "underline",
@@ -43,7 +51,7 @@ export default function Header() {
             className="login-icon"
           />
         </Link>
-        {auth.currentUser && (
+        {user && (
           <button
             onClick={() => {
               logout(navigate);

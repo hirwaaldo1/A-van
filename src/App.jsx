@@ -1,6 +1,7 @@
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  redirect,
   Route,
   RouterProvider,
 } from "react-router-dom";
