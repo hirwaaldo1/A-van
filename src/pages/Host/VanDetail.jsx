@@ -2,8 +2,8 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 import { useLoaderData } from "react-router-dom";
 import { getVan } from "../../services/api";
 import checkAuth from "../../utils/checkAuth";
-export async function loader({ params }) {
-  await checkAuth();
+export async function loader({ params, request }) {
+  await checkAuth(request);
   return await getVan(params.vanId);
 }
 

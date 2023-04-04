@@ -30,10 +30,10 @@ export async function signup(email, password) {
   }
 }
 
-export async function login(email, password) {
+export async function login(email, password, pathname) {
   try {
     await signInWithEmailAndPassword(auth, email, password);
-    return redirect("/host");
+    return redirect(pathname);
   } catch (error) {
     return error.message;
   }

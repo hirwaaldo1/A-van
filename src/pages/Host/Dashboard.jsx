@@ -4,8 +4,8 @@ import { BsStarFill } from "react-icons/bs";
 import { getVans } from "../../services/api";
 import { defer } from "react-router-dom/dist";
 import checkAuth from "../../utils/checkAuth";
-export async function loader() {
-  await checkAuth();
+export async function loader({ request }) {
+  await checkAuth(request);
   return defer({ vans: getVans() });
 }
 

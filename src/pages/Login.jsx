@@ -9,7 +9,9 @@ export async function action({ request }) {
   const formData = await request.formData();
   const email = formData.get("email");
   const password = formData.get("password");
-  const respond = await login(email, password);
+  const pathname =
+    new URL(request.url).searchParams.get("redirectTo") || "/host";
+  const respond = await login(email, password, pathname);
   return respond;
 }
 export default function Login() {

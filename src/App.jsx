@@ -58,7 +58,7 @@ const router = createBrowserRouter(
         <Route
           path="income"
           element={<HostIncome />}
-          loader={async () => await checkAuth()}
+          loader={async ({ request }) => await checkAuth(request)}
         />
         <Route path="vans" element={<HostVans />} loader={hostVansLoader} />
         <Route
@@ -73,7 +73,7 @@ const router = createBrowserRouter(
         <Route
           path="reviews"
           element={<HostReviews />}
-          loader={async () => await checkAuth()}
+          loader={async ({ request }) => await checkAuth(request)}
         />
       </Route>
       <Route path="*" element={<NotFound />} />
