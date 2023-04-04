@@ -6,7 +6,8 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home";
 import Layout from "./components/Layout/index";
-import Vans, { loader } from "./pages/Vans";
+// import Vans, { loader } from "./pages/Vans";
+import Vans, { loader as vansLoader } from "./pages/Vans";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import Login, {
@@ -19,7 +20,6 @@ import HostIncome from "./pages/Host/Income";
 import HostVans from "./pages/Host/Vans";
 import HostReviews from "./pages/Host/Reviews";
 import { loader as vansDashboardLoader } from "./pages/Host/Dashboard";
-import { loader as vansLoader } from "./pages/Host/Vans";
 import { loader as vansIdLoader } from "./pages/Vans/Detail";
 import { loader as hostVansLoader } from "./pages/Host/Vans";
 import Error from "./components/error/Error";
