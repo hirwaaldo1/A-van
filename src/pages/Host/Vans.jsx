@@ -1,9 +1,7 @@
 import { Suspense } from "react";
 import { Await, Link, useLoaderData } from "react-router-dom";
 import { getVans } from "../../services/api";
-import checkAuth from "../../utils/checkAuth";
 export async function loader() {
-  await checkAuth();
   return { vans: getVans() };
 }
 export default function HostVans() {
