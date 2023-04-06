@@ -1,77 +1,43 @@
-import { Suspense, useState } from "react";
-import { Await, Link, useLoaderData, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 export default function Vans() {
-  const filterOption = ["simple", "luxury", "rugged"]; // all Variables should be named in camelCase
-  const data = useLoaderData();
-  const [searchParams, setSearchParams] = useSearchParams();
-  function filterVans(type) {
-    setSearchParams((params) => {
-      params.set("type", type);
-      return params;
-    });
-  }
-  function displayVans(vans) {
-    const displayData = searchParams.get("type")
-      ? vans.filter((van) => van.type === searchParams.get("type"))
-      : vans;
-    return displayData.map((van) => (
-      <div key={van.id} className="van-tile">
-        {/* the reason why i didn't used "/vans/:vanId" is because V6 came with new feature of relative */}
-        <Link to={`${van.id}`} state={{ from: "vans" }}>
-          <img src={van.imageUrl} />
-          <div className="van-info">
-            <h3>{van.name}</h3>
-            <p>
-              ${van.price}
-              <span>/day</span>
-            </p>
-          </div>
-          <i className={`van-type ${van.type}`}>{van.type}</i>
-        </Link>
-      </div>
-    ));
-  }
+  const [vans, setVans] = useState([]);
+
+  useEffect(() => {
+    async function fetchVans() {
+      try {
+        const response = await fetch("/api/vans");
+        const data = await response.json();
+        setVans(data.vans);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchVans();
+  }, []);
+
   return (
     <div className="van-list-container">
       <h1>Explore our van options</h1>
-      <div className="van-list-filter-buttons">
-        {filterOption.map((value, index) => {
+      <div className="van-list">
+        {vans.map((van) => {
           return (
-            <button
-              key={`filter-option-${index}`}
-              className={`van-type ${
-                value === searchParams.get("type") && `active ${value}`
-              }
-              }`}
-              onClick={() => filterVans(value)}
-            >
-              {value}
-            </button>
+            <div key={van.id} className="van-tile">
+              <Link to={`/vans/${van.id}`}>
+                <img src={van.imageUrl} />
+                <div className="van-info">
+                  <h3>{van.name}</h3>
+                  <p>
+                    ${van.price}
+                    <span>/day</span>
+                  </p>
+                </div>
+                <i className={`van-type ${van.type} selected`}>{van.type}</i>
+              </Link>
+            </div>
           );
         })}
-        {searchParams.get("type") && (
-          <button
-            className="van-type clear-filters"
-            onClick={() => {
-              setSearchParams((params) => {
-                params.delete("type");
-                return params;
-              });
-            }}
-          >
-            Clear filter
-          </button>
-        )}
-      </div>
-      <div className="van-list">
-        <Suspense fallback={<h2>Loading vans...</h2>}>
-          <Await resolve={data.vans}>{displayVans}</Await>
-        </Suspense>
       </div>
     </div>
   );
-}
-export async function loader() {
-  const res = await fetch("/api/vans");
-  return res.json();
 }
