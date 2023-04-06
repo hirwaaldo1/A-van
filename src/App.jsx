@@ -4,9 +4,8 @@ import Layout from "./components/Layout/index";
 import Vans from "./pages/Vans";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
+import VanDetail from "./pages/Vans/Detail";
 import Login from "./pages/Login";
-import Dashboard from "./pages/Host/Dashboard";
-import HostLayout from "./components/Wrapper/Host";
 function App() {
   return (
     <BrowserRouter>
@@ -16,9 +15,7 @@ function App() {
           <Route path="vans" element={<Vans />} />
           <Route path="about" element={<About />} />
           <Route path="login" element={<Login />} />
-          <Route path="host" element={<HostLayout />}>
-            <Route index element={<Dashboard />} />
-          </Route>
+          <Route path="/vans/:id" element={<VanDetail />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>

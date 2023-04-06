@@ -5,9 +5,7 @@ export default function Login() {
       <form method="post" className="login-form" replace>
         <input name="email" type="email" placeholder="Email address" />
         <input name="password" type="password" placeholder="Password" />
-        <button>
-          {navigation.state === "submitting" ? "Logging in..." : "Log in"}
-        </button>
+        <button>Log in</button>
       </form>
     </div>
   );
