@@ -1,9 +1,11 @@
-import { Link, useSearchParams } from "react-router-dom";
-import { useEffect, useState, useMemo } from "react";
+import { Link, useSearchParams, useLoaderData } from "react-router-dom";
+import { useMemo } from "react";
+import { getVans } from "../../services/api";
+export function loader() {
+  return getVans();
+}
 export default function Vans() {
-  const [vans, setVans] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const vans = useLoaderData();
   const filterOption = ["simple", "luxury", "rugged"];
   const [searchParams, setSearchParams] = useSearchParams();
   const typeFilter = searchParams.get("type");
@@ -11,21 +13,6 @@ export default function Vans() {
     return typeFilter ? vans.filter((van) => van.type === typeFilter) : vans;
   }, [typeFilter, vans]);
 
-  useEffect(() => {
-    async function fetchVans() {
-      setLoading(true);
-      try {
-        const response = await fetch("/api/vans");
-        const data = await response.json();
-        setVans(data.vans);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchVans();
-  }, []);
   function handleFilterChange(key, value) {
     setSearchParams((prevParams) => {
       if (value === null) {
@@ -35,13 +22,6 @@ export default function Vans() {
       }
       return prevParams;
     });
-  }
-  if (loading) {
-    return <h1>Loading...</h1>;
-  }
-
-  if (error) {
-    return <h1>There was an error: {error.message}</h1>;
   }
 
   return (
@@ -75,7 +55,13 @@ export default function Vans() {
         {displayedVans.map((van) => {
           return (
             <div key={van.id} className="van-tile">
-              <Link to={`/vans/${van.id}`}>
+              <Link
+                to={`/vans/${van.id}`}
+                state={{
+                  search: `?${searchParams.toString()}`,
+                  type: typeFilter,
+                }}
+              >
                 <img src={van.imageUrl} />
                 <div className="van-info">
                   <h3>{van.name}</h3>
