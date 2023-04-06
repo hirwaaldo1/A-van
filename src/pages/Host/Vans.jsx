@@ -1,20 +1,13 @@
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-export default function Vans() {
-  const [vans, setVans] = useState([]);
+import { Link, useLoaderData } from "react-router-dom";
+import { requireAuth } from "../../utils/requireAuth";
+import { getHostVans } from "../../services/api";
+export async function loader({ request }) {
+  await requireAuth(request);
+  return getHostVans();
+}
 
-  useEffect(() => {
-    async function fetchVans() {
-      try {
-        const response = await fetch("/api/vans");
-        const data = await response.json();
-        setVans(data.vans);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    fetchVans();
-  }, []);
+export default function Vans() {
+  const vans = useLoaderData();
 
   return (
     <section>

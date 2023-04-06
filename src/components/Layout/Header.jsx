@@ -1,12 +1,16 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 export default function Header() {
+  const navigation = useNavigate();
   const activeStyles = {
     fontWeight: "bold",
     textDecoration: "underline",
     color: "#161616",
   };
-
+  function logOut() {
+    localStorage.removeItem("loggedin");
+    navigation("/");
+  }
   return (
     <header>
       <Link className="site-logo" to="/">
@@ -31,6 +35,16 @@ export default function Header() {
         >
           Vans
         </NavLink>
+        <Link to="login" className="login-link">
+          <img
+            src="/assets/avatar-icon.png"
+            className="login-icon"
+            alt="login icon"
+          />
+        </Link>
+        {localStorage.getItem("loggedin") && (
+          <button onClick={logOut}>X</button>
+        )}
       </nav>
     </header>
   );

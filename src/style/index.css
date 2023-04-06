@@ -44,6 +44,11 @@ header .site-logo {
   font-weight: 900;
   font-size: 25px;
 }
+@media screen and (max-width: 768px) {
+  header .site-logo {
+    font-size: 16px;
+  }
+}
 
 header a {
   text-decoration: none;
