@@ -1,26 +1,78 @@
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import { useEffect, useState, useMemo } from "react";
 export default function Vans() {
   const [vans, setVans] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const filterOption = ["simple", "luxury", "rugged"];
+  const [searchParams, setSearchParams] = useSearchParams();
+  const typeFilter = searchParams.get("type");
+  const displayedVans = useMemo(() => {
+    return typeFilter ? vans.filter((van) => van.type === typeFilter) : vans;
+  }, [typeFilter, vans]);
 
   useEffect(() => {
     async function fetchVans() {
+      setLoading(true);
       try {
         const response = await fetch("/api/vans");
         const data = await response.json();
         setVans(data.vans);
       } catch (error) {
-        console.error(error);
+        setError(error);
+      } finally {
+        setLoading(false);
       }
     }
     fetchVans();
   }, []);
+  function handleFilterChange(key, value) {
+    setSearchParams((prevParams) => {
+      if (value === null) {
+        prevParams.delete(key);
+      } else {
+        prevParams.set(key, value);
+      }
+      return prevParams;
+    });
+  }
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
+
+  if (error) {
+    return <h1>There was an error: {error.message}</h1>;
+  }
 
   return (
     <div className="van-list-container">
       <h1>Explore our van options</h1>
+      <div className="van-list-filter-buttons">
+        {filterOption.map((option, index) => {
+          return (
+            <button
+              key={`van-type-${index}`}
+              onClick={() => handleFilterChange("type", option)}
+              className={`van-type ${option} ${
+                typeFilter === option ? "selected" : ""
+              }`}
+            >
+              {option}
+            </button>
+          );
+        })}
+
+        {typeFilter ? (
+          <button
+            onClick={() => handleFilterChange("type", null)}
+            className="van-type clear-filters"
+          >
+            Clear filter
+          </button>
+        ) : null}
+      </div>
       <div className="van-list">
-        {vans.map((van) => {
+        {displayedVans.map((van) => {
           return (
             <div key={van.id} className="van-tile">
               <Link to={`/vans/${van.id}`}>
