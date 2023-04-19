@@ -1,5 +1,6 @@
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState, useMemo } from "react";
+import { getVans } from "../../services/api";
 
 export default function Vans() {
   const [vans, setVans] = useState([]);
@@ -16,9 +17,8 @@ export default function Vans() {
     async function fetchVans() {
       setLoading(true);
       try {
-        const response = await fetch("/api/vans");
-        const data = await response.json();
-        setVans(data.vans);
+        const response = await getVans();
+        setVans(response);
       } catch (error) {
         setError(error);
       } finally {
@@ -75,7 +75,13 @@ export default function Vans() {
       <div className="van-list">
         {displayedVans.map((van) => (
           <div key={van.id} className="van-tile">
-            <Link to={`/vans/${van.id}`}>
+            <Link
+              to={`/vans/${van.id}`}
+              state={{
+                search: `?${searchParams.toString()}`,
+                type: typeFilter,
+              }}
+            >
               <img src={van.imageUrl} />
               <div className="van-info">
                 <h3>{van.name}</h3>

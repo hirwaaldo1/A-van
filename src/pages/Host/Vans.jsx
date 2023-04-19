@@ -1,18 +1,14 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { getVans } from "../../services/api";
 
 export default function Vans() {
   const [vans, setVans] = useState([]);
 
   useEffect(() => {
     async function fetchVans() {
-      try {
-        const response = await fetch("/api/vans");
-        const data = await response.json();
-        setVans(data.vans);
-      } catch (error) {
-        console.error(error);
-      }
+      const response = await getVans();
+      setVans(response);
     }
     fetchVans();
   }, []);
