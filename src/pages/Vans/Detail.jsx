@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+
 export default function VanDetail() {
   const { id } = useParams();
   const [van, setVan] = useState();
