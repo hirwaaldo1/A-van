@@ -6,6 +6,7 @@ import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import VanDetail from "./pages/Vans/Detail";
 import Login from "./pages/Login";
+
 function App() {
   return (
     <BrowserRouter>
