@@ -25,10 +25,12 @@ export async function action({ request }) {
     return err.message;
   }
 }
+
 export default function Login() {
   const errorMessage = useActionData();
   const message = useLoaderData();
   const navigation = useNavigation();
+
   return (
     <div className="login-container">
       <h1>Sign in to your account</h1>

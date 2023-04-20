@@ -1,6 +1,7 @@
 import { Link, NavLink, Outlet, useLoaderData } from "react-router-dom";
 import { requireAuth } from "../../utils/requireAuth";
 import { getHostVans } from "../../services/api";
+
 export async function loader({ params: { id }, request }) {
   await requireAuth(request);
   let data = await getHostVans(id);
@@ -18,9 +19,10 @@ export default function HostVanDetail() {
   if (!currentVan) {
     return <h1>Loading...</h1>;
   }
+
   return (
     <section>
-      <Link to=".." relative="path" className="back-button">
+      <Link to="/host/vans" relative="path" className="back-button">
         &larr; <span>Back to all vans</span>
       </Link>
       <div className="host-van-detail-layout-container">

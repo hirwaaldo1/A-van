@@ -1,5 +1,6 @@
 import { useLocation, Link, useLoaderData } from "react-router-dom";
 import { getVans } from "../../services/api";
+
 export function loader({ params: { id } }) {
   return getVans(id);
 }
@@ -9,6 +10,7 @@ export default function VanDetail() {
   const { state } = useLocation();
   const search = state?.search || "";
   const type = state?.type || "all";
+
   return (
     <div className="van-detail-container">
       <Link to={`..${search}`} relative="path" className="back-button">
