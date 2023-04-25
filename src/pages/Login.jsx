@@ -1,6 +1,7 @@
-import { Link, useLoaderData, useSearchParams } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { Form, useNavigation, useActionData } from "react-router-dom";
 import { login } from "../services/api";
+
 export function loader({ request }) {
   return new URL(request.url).searchParams.get("message");
 }
@@ -14,10 +15,12 @@ export async function action({ request }) {
   const respond = await login(email, password, pathname);
   return respond;
 }
+
 export default function Login() {
   const navigation = useNavigation();
   const errorMessage = useActionData();
   const message = useLoaderData();
+
   return (
     <div className="login-container">
       <h1>

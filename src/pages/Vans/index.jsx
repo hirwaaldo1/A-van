@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { Await, Link, useLoaderData, useSearchParams } from "react-router-dom";
 import { defer } from "react-router-dom/dist";
 import { getVans } from "../../services/api";
+
 export function loader() {
   return defer({ vans: getVans() });
 }
@@ -37,6 +38,7 @@ export default function Vans() {
       </div>
     ));
   }
+
   return (
     <div className="van-list-container">
       <h1>Explore our van options</h1>

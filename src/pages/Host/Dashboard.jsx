@@ -4,6 +4,7 @@ import { BsStarFill } from "react-icons/bs";
 import { getVans } from "../../services/api";
 import { defer } from "react-router-dom/dist";
 import checkAuth from "../../utils/checkAuth";
+
 export async function loader({ request }) {
   await checkAuth(request);
   return defer({ vans: getVans() });
@@ -11,6 +12,7 @@ export async function loader({ request }) {
 
 export default function Dashboard() {
   const data = useLoaderData();
+
   function displayVans(vans) {
     return vans.map((van) => (
       <section key={van.id}>
@@ -27,6 +29,7 @@ export default function Dashboard() {
       </section>
     ));
   }
+
   return (
     <>
       <section className="host-dashboard-earnings">

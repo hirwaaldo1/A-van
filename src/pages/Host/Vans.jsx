@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { Await, Link, useLoaderData } from "react-router-dom";
 import { getVans } from "../../services/api";
 import checkAuth from "../../utils/checkAuth";
+
 export async function loader({ request }) {
   await checkAuth(request);
   return { vans: getVans() };
@@ -16,7 +17,7 @@ export default function HostVans() {
         key={van.id}
         className="host-van-link-wrapper"
       >
-        <div className="host-van-single" key={van.id}>
+        <div className="host-van-single">
           <img src={van.imageUrl} alt={`Photo of ${van.name}`} />
           <div className="host-van-info">
             <h3>{van.name}</h3>
@@ -26,6 +27,7 @@ export default function HostVans() {
       </Link>
     ));
   }
+
   return (
     <section>
       <h1 className="host-vans-title">Your listed vans</h1>

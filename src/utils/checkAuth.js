@@ -4,17 +4,14 @@ import { onAuthStateChanged } from "firebase/auth";
 
 export default async function checkAuth(request) {
   const pathname = new URL(request.url).pathname;
-  let checkUserAuth = false;
   await onAuthStateChanged(auth, (user) => {
-    if (user) {
-      return (checkUserAuth = true);
-    }
-    return (checkUserAuth = false);
+    if (user) return localStorage.setItem("user", user.uid + Math.random());
+    localStorage.setItem("user", null);
   });
-  if (!checkUserAuth) {
+  if (localStorage.getItem("user") === "null")
     throw redirect(
       `/login?message=You must log in first please.&redirectTo=${pathname}`
     );
-  }
+
   return null;
 }
