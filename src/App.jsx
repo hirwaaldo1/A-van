@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home";
 import Layout from "./components/Layout/index";
-// import Vans, { loader } from "./pages/Vans";
 import Vans, { loader as vansLoader } from "./pages/Vans";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
@@ -34,6 +33,7 @@ import HostVanInfo from "./pages/Host/VanInfo";
 import HostVanPricing from "./pages/Host/VanPricing";
 import HostVanPhotos from "./pages/Host/VanPhotos";
 import checkAuth from "./utils/checkAuth";
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
@@ -80,6 +80,7 @@ const router = createBrowserRouter(
     </Route>
   )
 );
+
 function App() {
   return <RouterProvider router={router} />;
 }

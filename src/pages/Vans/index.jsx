@@ -43,10 +43,10 @@ export default function Vans() {
     <div className="van-list-container">
       <h1>Explore our van options</h1>
       <div className="van-list-filter-buttons">
-        {filterOption.map((value, index) => {
+        {filterOption.map((value) => {
           return (
             <button
-              key={`filter-option-${index}`}
+              key={`filter-option-${value}`}
               className={`van-type ${
                 value === searchParams.get("type") && `active ${value}`
               }

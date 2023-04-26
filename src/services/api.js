@@ -42,10 +42,8 @@ export async function login(email, password, pathname) {
 export async function logout(navigate) {
   try {
     await auth.signOut();
-    console.log("logged out 11");
     return navigate("/");
   } catch (error) {
-    console.log(error, "error in logout");
     return error.message;
   }
 }

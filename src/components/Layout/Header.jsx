@@ -43,13 +43,7 @@ export default function Header() {
           Vans
         </NavLink>
         <Link to="login" className="login-link">
-          <img
-            src="/assets/avatar-icon.png"
-            onClick={() => {
-              console.log(auth.currentUser, "current user");
-            }}
-            className="login-icon"
-          />
+          <img src="/assets/avatar-icon.png" className="login-icon" />
         </Link>
         {user && (
           <button
